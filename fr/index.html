@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MVT - Archi paiement Visa/Mastercard</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="css/custom.css">
+  
+  <style media="print">
+    .reveal.print-pdf {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    .reveal.print-pdf .slides {
+      position: static;
+      width: 100% !important;
+      height: auto !important;
+      display: block;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible;
+    }
+    .reveal.print-pdf .slides > section {
+      display: block;
+      page-break-after: always;
+      position: relative;
+      width: 100% !important;
+      height: 100% !important;
+      min-height: 800px;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+      overflow: visible;
+    }
+    .reveal.print-pdf .slides > section.stack {
+      margin: 0 !important;
+      padding: 0 !important;
+      page-break-after: avoid;
+      height: auto !important;
+      min-height: 0 !important;
+    }
+    .reveal.print-pdf .slides > section.present {
+      outline: none;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section id="title"></section>
+      <section id="probleme"></section>
+      <section id="intro"></section>
+      <section id="historique"></section>
+      <section id="historiqueSuite"></section>
+      <section id="ecosysteme"></section>
+      <section id="dependance"></section>
+      <section id="risques"></section>
+      <section id="architecture"></section>
+      <section id="architectureSettlement"></section>
+      <section id="architectureSuite"></section>
+      <section id="contraintes"></section>
+      <section id="dora"></section>
+      <section id="alternatives"></section>
+      <section id="nouvellesTech"></section>
+      <section id="emergentes"></section>
+      <section id="comparatif"></section>
+      <section id="limites"></section>
+      <section id="paymentHub"></section>
+      <section id="paymentHubSuite"></section>
+      <section id="perspectives"></section>
+      <section id="conclusion"></section>
+      <section id="equipe"></section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/notes/notes.js"></script>
+  
+  <script type="module">
+    import { 
+      loadSlideModule, 
+      renderSlide, 
+      initializeSlide, 
+      cleanupSlide, 
+      preloadAllSlides 
+    } from './js/slideModule.js';
+    
+    const slideIds = [
+      'title', 'probleme', 'intro', 'historique', 'historiqueSuite',
+      'ecosysteme', 'dependance', 'risques', 'architecture', 'architectureSettlement', 'architectureSuite',
+      'contraintes', 'dora', 'alternatives', 'nouvellesTech', 'emergentes',
+      'comparatif', 'limites', 'paymentHub', 'paymentHubSuite',
+      'perspectives', 'conclusion', 'equipe'
+    ];
+    
+    let currentSlideId = null;
+    
+    Reveal.initialize({
+      hash: true,
+      center: true,
+      history: true,
+      minScale: 0.2,
+      maxScale: 2.0,
+      transition: 'slide',
+      plugins: [ RevealNotes ]
+    });
+    
+    preloadAllSlides(slideIds).then(() => {
+      slideIds.forEach(id => {
+        const container = document.getElementById(id);
+        if (container) {
+          renderSlide(id, container);
+        }
+      });
+      
+      const currentIndex = Reveal.getIndices().h;
+      if (currentIndex >= 0 && currentIndex < slideIds.length) {
+        currentSlideId = slideIds[currentIndex];
+        initializeSlide(currentSlideId);
+      }
+    });
+
+    Reveal.addEventListener('slidechanged', function(event) {
+      const indices = Reveal.getIndices();
+      
+      if (indices.h >= 0 && indices.h < slideIds.length) {
+        const newSlideId = slideIds[indices.h];
+        
+        if (currentSlideId && currentSlideId !== newSlideId) {
+          cleanupSlide(currentSlideId);
+        }
+        
+        currentSlideId = newSlideId;
+        initializeSlide(currentSlideId);
+      } else {
+        if (currentSlideId) {
+          cleanupSlide(currentSlideId);
+          currentSlideId = null;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

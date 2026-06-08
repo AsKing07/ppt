@@ -1,0 +1,19 @@
+# Dossiers de travail locaux à la racine (doublons de fr/ et en/)
+/slides/
+/slides-en/
+
+# Fichiers locaux / temporaires
+_docx_*
+_temp.zip
+*.tmp
+
+# Document source (optionnel — retirer cette ligne pour versionner le .docx)
+*.docx
+
+# Environnement Python (serveur local)
+.venv/
+__pycache__/
+
+# OS
+Thumbs.db
+.DS_Store
