@@ -1,5 +1,5 @@
 export const html = `
-  <span class="speaker-badge">Dandara Helen SOUZA GOMEZ</span>
+  <span class="speaker-badge">Dandara Helen SOUZA GOMES</span>
   <h2>Perspectives d'évolution</h2>
   <div style="display: flex; gap: 15px; justify-content: center;">
     <div class="card fragment" style="flex: 1; max-width: 42%; padding: 12px; margin: 0;">
