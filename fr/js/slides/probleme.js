@@ -4,11 +4,6 @@ export const html = `
   <blockquote style="font-size: 0.48em; text-align: left; max-width: 92%; margin: 10px auto; border-left: 4px solid #4285f4; padding-left: 16px;">
     Comment la dépendance des banques européennes aux réseaux Visa et Mastercard impacte-t-elle leur architecture informatique, et quelles alternatives peuvent renforcer la résilience des systèmes de paiement ?
   </blockquote>
-  <ul class="fragment" style="font-size: 0.48em; margin-top: 10px;">
-    <li>Paiements électroniques : infrastructure stratégique de l'économie numérique européenne</li>
-    <li>Visa / Mastercard : interopérabilité mondiale, mais dépendance structurelle</li>
-    <li>Enjeux : résilience, souveraineté, maîtrise des données</li>
-  </ul>
   <p class="fragment" style="font-size: 0.42em; margin-top: 8px; font-style: italic;">
     « L'urgence, c'est notre système de paiements. » — Aurore Lalucq, Eurodéputée
   </p>
