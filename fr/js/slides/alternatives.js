@@ -11,10 +11,6 @@ export const html = `
       <p style="font-size: 0.45em; margin: 0;">Virements en &lt; 10 secondes, 24/7, ISO 20022</p>
     </div>
     <div class="card fragment" style="padding: 10px; margin: 0;">
-      <h4 style="margin: 0 0 5px 0;">Euro numérique (BCE)</h4>
-      <p style="font-size: 0.45em; margin: 0;">MNBC complémentaire, souveraineté monétaire</p>
-    </div>
-    <div class="card fragment" style="padding: 10px; margin: 0;">
       <h4 style="margin: 0 0 5px 0;">Réseaux nationaux</h4>
       <p style="font-size: 0.45em; margin: 0;">CB (FR), Girocard (DE), Bancontact (BE), iDEAL (NL)</p>
     </div>

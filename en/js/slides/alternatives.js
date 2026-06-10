@@ -11,10 +11,6 @@ export const html = `
       <p style="font-size: 0.45em; margin: 0;">Transfers in &lt; 10 seconds, 24/7, ISO 20022</p>
     </div>
     <div class="card fragment" style="padding: 10px; margin: 0;">
-      <h4 style="margin: 0 0 5px 0;">Digital euro (ECB)</h4>
-      <p style="font-size: 0.45em; margin: 0;">Complementary CBDC, monetary sovereignty</p>
-    </div>
-    <div class="card fragment" style="padding: 10px; margin: 0;">
       <h4 style="margin: 0 0 5px 0;">National schemes</h4>
       <p style="font-size: 0.45em; margin: 0;">CB (FR), Girocard (DE), Bancontact (BE), iDEAL (NL)</p>
     </div>
