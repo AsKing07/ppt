@@ -74,10 +74,8 @@
       <section id="contraintes"></section>
       <section id="dora"></section>
       <section id="alternatives"></section>
-      <section id="nouvellesTech"></section>
       <section id="emergentes"></section>
       <section id="comparatif"></section>
-      <section id="limites"></section>
       <section id="paymentHub"></section>
       <section id="paymentHubSuite"></section>
       <section id="perspectives"></section>
@@ -95,14 +93,15 @@
       renderSlide, 
       initializeSlide, 
       cleanupSlide, 
-      preloadAllSlides 
+      preloadAllSlides,
+      updateNextSpeakerHint
     } from './js/slideModule.js';
     
     const slideIds = [
       'title', 'probleme', 'historique',
       'ecosysteme', 'dependance', 'risques', 'architecture', 'architectureSettlement', 'architectureSuite',
-      'contraintes', 'dora', 'alternatives', 'nouvellesTech', 'emergentes',
-      'comparatif', 'limites', 'paymentHub', 'paymentHubSuite',
+      'contraintes', 'dora', 'alternatives', 'emergentes',
+      'comparatif', 'paymentHub', 'paymentHubSuite',
       'perspectives', 'conclusion', 'equipe'
     ];
     
@@ -130,6 +129,7 @@
       if (currentIndex >= 0 && currentIndex < slideIds.length) {
         currentSlideId = slideIds[currentIndex];
         initializeSlide(currentSlideId);
+        updateNextSpeakerHint(currentSlideId);
       }
     });
 
@@ -145,11 +145,13 @@
         
         currentSlideId = newSlideId;
         initializeSlide(currentSlideId);
+        updateNextSpeakerHint(currentSlideId);
       } else {
         if (currentSlideId) {
           cleanupSlide(currentSlideId);
           currentSlideId = null;
         }
+        updateNextSpeakerHint(null);
       }
     });
   </script>

@@ -294,6 +294,564 @@ body {
   object-fit: contain;
 }
 
+/* Next speaker — élément global sur body, hors du transform Reveal.js */
+#next-speaker-hint {
+  position: fixed;
+  bottom: 14px;
+  right: 24px;
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  font-size: 11px;
+  color: #b5b5b5;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  pointer-events: none;
+  z-index: 9999;
+  margin: 0;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+#next-speaker-hint[hidden] {
+  display: none !important;
+}
+
+/* Interactive Visa workflow */
+.visa-workflow-wrap {
+  width: 96%;
+  margin: 0 auto;
+}
+
+.visa-workflow {
+  position: relative;
+  border-radius: 14px;
+  border: 1px solid #dde4f0;
+  padding: 10px 14px 12px;
+  box-shadow: 0 4px 24px rgba(26, 86, 219, 0.08);
+  overflow: hidden;
+}
+
+.visa-theme-auth {
+  background: linear-gradient(160deg, #f0f5ff 0%, #e8f0fe 40%, #f8f9fc 100%);
+}
+
+.visa-theme-settle {
+  background: linear-gradient(160deg, #f0fdf8 0%, #e6f7f0 40%, #f8f9fc 100%);
+}
+
+.visa-workflow-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.visa-phase-badge {
+  font-size: 0.32em;
+  font-weight: 600;
+  color: #1a56db;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid #c7d9f7;
+  border-radius: 20px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.visa-theme-settle .visa-phase-badge {
+  color: #047857;
+  border-color: #a7f3d0;
+}
+
+.visa-progress {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.visa-progress-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 2px solid #c5d0e6;
+  background: #fff;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.visa-progress-dot.active {
+  background: #1a56db;
+  border-color: #1a56db;
+  transform: scale(1.35);
+  box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.2);
+}
+
+.visa-progress-dot.done {
+  background: #34a853;
+  border-color: #34a853;
+}
+
+.visa-workflow-body {
+  position: relative;
+  height: 130px;
+}
+
+.visa-workflow-tall .visa-workflow-body,
+.visa-workflow-tall .visa-workflow-track,
+.visa-workflow-tall .visa-workflow-svg {
+  height: 195px;
+}
+
+.visa-workflow-tall .visa-node-icon {
+  width: 42px;
+  height: 42px;
+}
+
+.visa-workflow-tall .visa-node-emoji {
+  font-size: 1em;
+}
+
+.visa-workflow-track {
+  position: relative;
+  width: 100%;
+  height: 130px;
+}
+
+.visa-workflow-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+
+.visa-arrow {
+  fill: none;
+  stroke: #c5d0e6;
+  stroke-width: 2;
+  transition: stroke 0.4s ease, stroke-width 0.3s ease;
+}
+
+.visa-arrow.active {
+  stroke: url(#grad-fallback);
+  stroke: #3b82f6;
+  stroke-width: 2.5;
+  stroke-dasharray: 7 5;
+  animation: visa-flow 0.7s linear infinite;
+}
+
+.visa-arrow-funds.active {
+  stroke: #059669;
+  stroke-width: 2.5;
+}
+
+@keyframes visa-flow {
+  to { stroke-dashoffset: -12; }
+}
+
+.visa-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  transition: transform 0.35s ease;
+  width: 72px;
+  pointer-events: none;
+}
+
+.visa-node-icon {
+  --node-color: #4285f4;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  border: 2.5px solid var(--node-color);
+  border-radius: 50%;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  transition: all 0.35s ease;
+}
+
+.visa-node-emoji {
+  font-size: 1.15em;
+  line-height: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.visa-node-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid var(--node-color);
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+.visa-node.active .visa-node-pulse {
+  animation: visa-pulse 1.6s ease-out infinite;
+}
+
+@keyframes visa-pulse {
+  0% { opacity: 0.7; transform: scale(0.9); }
+  100% { opacity: 0; transform: scale(1.35); }
+}
+
+.visa-node-label {
+  font-size: 0.3em;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  max-width: 72px;
+  line-height: 1.1;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+.visa-node-sublabel {
+  font-size: 0.24em;
+  color: #888;
+  text-align: center;
+  max-width: 72px;
+  line-height: 1.1;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0 3px;
+  border-radius: 3px;
+}
+
+.visa-node.active .visa-node-icon {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--node-color) 40%, transparent);
+}
+
+.visa-node.active .visa-node-label {
+  color: var(--node-color);
+}
+
+.visa-node.done .visa-node-icon {
+  background: color-mix(in srgb, var(--node-color) 12%, white);
+}
+
+.visa-node.done .visa-node-label {
+  color: #34a853;
+}
+
+.visa-step-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid #e2e8f4;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin: 4px 0 6px;
+  min-height: 2.6em;
+}
+
+.visa-step-num {
+  font-size: 0.38em;
+  font-weight: 800;
+  color: #1a56db;
+  background: #e8f0fe;
+  border-radius: 6px;
+  padding: 3px 7px;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.visa-theme-settle .visa-step-num {
+  color: #047857;
+  background: #d1fae5;
+}
+
+.visa-step-desc {
+  font-size: 0.4em !important;
+  line-height: 1.45;
+  color: #333;
+  margin: 0 !important;
+  text-align: left;
+  flex: 1;
+}
+
+.visa-workflow-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.visa-btn {
+  font-size: 0.34em;
+  padding: 5px 13px;
+  border: 1px solid #ccd5e8;
+  border-radius: 8px;
+  background: #fff;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+
+.visa-btn:hover:not(:disabled) {
+  background: #f0f4ff;
+  border-color: #93b4f5;
+}
+
+.visa-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.visa-btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #1a56db);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(26, 86, 219, 0.3);
+}
+
+.visa-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+}
+
+.visa-step-counter {
+  font-size: 0.32em;
+  color: #999;
+  min-width: 68px;
+  text-align: center;
+}
+
+/* Architecture suite — diagramme en couches */
+.arch-suite {
+  width: 94%;
+  margin: 0 auto;
+}
+
+.arch-suite-layers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.arch-layer {
+  width: 100%;
+  border-radius: 10px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+
+.arch-layer-channels {
+  background: linear-gradient(90deg, #f5f3ff, #ede9fe);
+  border: 1px solid #ddd6fe;
+}
+
+.arch-layer-core {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.arch-layer-rails {
+  background: linear-gradient(90deg, #eff6ff, #dbeafe);
+  border: 1px solid #bfdbfe;
+}
+
+.arch-layer-tag {
+  font-size: 0.3em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.arch-chips {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.arch-chip {
+  font-size: 0.34em;
+  background: #fff;
+  border: 1px solid #ddd6fe;
+  border-radius: 20px;
+  padding: 4px 12px;
+  color: #5b21b6;
+  font-weight: 600;
+}
+
+.arch-connector-v {
+  font-size: 0.35em;
+  color: #9ca3af;
+  line-height: 1;
+  margin: 1px 0;
+}
+
+.arch-core-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 88%;
+  background: #fff;
+  border-radius: 10px;
+  padding: 8px 14px;
+  border: 2px solid #e5e7eb;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.arch-switch {
+  border-color: #93c5fd;
+  background: linear-gradient(135deg, #fff, #eff6ff);
+}
+
+.arch-hub {
+  border-color: #6ee7b7;
+  background: linear-gradient(135deg, #fff, #ecfdf5);
+}
+
+.arch-core-card.focused,
+.arch-core-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.arch-switch.focused, .arch-switch:hover { border-color: #3b82f6; }
+.arch-hub.focused, .arch-hub:hover { border-color: #10b981; }
+
+.arch-card-icon {
+  font-size: 1.1em;
+  flex-shrink: 0;
+}
+
+.arch-card-body {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.arch-card-body strong {
+  font-size: 0.42em;
+  color: #1f2937;
+}
+
+.arch-card-body span {
+  font-size: 0.32em;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.arch-core-bridge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 70%;
+}
+
+.arch-bridge-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #9ca3af, transparent);
+}
+
+.arch-bridge-label {
+  font-size: 0.28em;
+  color: #9ca3af;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.arch-rails {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.arch-rail {
+  flex: 1;
+  min-width: 140px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 7px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: left;
+}
+
+.arch-rail-legacy { border: 1.5px solid #fca5a5; }
+.arch-rail-modern { border: 1.5px solid #6ee7b7; }
+
+.arch-rail-badge {
+  font-size: 0.34em;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.arch-rail-legacy .arch-rail-badge { color: #dc2626; }
+.arch-rail-modern .arch-rail-badge { color: #059669; }
+
+.arch-rail span:last-child {
+  font-size: 0.3em;
+  color: #6b7280;
+}
+
+.arch-security-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+  background: linear-gradient(90deg, #1e293b, #334155);
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 0.32em;
+}
+
+.arch-security-bar strong {
+  color: #fbbf24;
+  font-size: 1.05em;
+}
+
+.arch-security-sep {
+  opacity: 0.4;
+}
+
+.arch-security-icon {
+  font-size: 1.1em;
+}
+
+.arch-suite-footnote {
+  font-size: 0.32em !important;
+  color: #9ca3af;
+  font-style: italic;
+  margin: 6px 0 0 !important;
+  text-align: center;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .canvas-container, 

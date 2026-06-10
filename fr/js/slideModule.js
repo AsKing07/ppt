@@ -1,10 +1,34 @@
 /**
- * 幻灯片模块系统
- * 用于集中管理幻灯片模块的加载和初始化
+ * Module system for slides
  */
 
-// 存储已加载的幻灯片模块
+import { nextSpeaker } from './speakers.js';
+
 const loadedSlides = {};
+let hintEl = null;
+
+function getHintEl() {
+  if (!hintEl) {
+    hintEl = document.createElement('div');
+    hintEl.id = 'next-speaker-hint';
+    hintEl.className = 'next-speaker-hint';
+    hintEl.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(hintEl);
+  }
+  return hintEl;
+}
+
+/** Met à jour l'indicateur global (hors .reveal, évite les transforms Reveal.js) */
+export function updateNextSpeakerHint(slideId) {
+  const el = getHintEl();
+  const next = nextSpeaker[slideId];
+  if (next) {
+    el.textContent = `→ ${next}`;
+    el.hidden = false;
+  } else {
+    el.hidden = true;
+  }
+}
 
 /**
  * 加载幻灯片模块
@@ -38,11 +62,10 @@ export function renderSlide(slideId, container) {
     return;
   }
   
-  // 渲染HTML内容
   if (loadedSlides[slideId].html) {
     container.innerHTML = loadedSlides[slideId].html;
   }
-  
+
   console.log(`渲染幻灯片: ${slideId}`);
 }
 
