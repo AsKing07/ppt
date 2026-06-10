@@ -44,7 +44,7 @@ git clone <URL_DU_REPO>
 cd ppt
 ```
 
-### 2. Lancer le serveur (recommandé)
+### 2. Lancer le serveur
 
 Le projet utilise des **modules ES6** (`import` / `export`) : il faut un serveur HTTP local. Ne pas ouvrir `index.html` directement en `file://`.
 
@@ -64,7 +64,7 @@ pip install -r requirements.txt
 python start-server.py
 ```
 
-Le navigateur s'ouvre sur **http://localhost:8000**. Les modifications dans les fichiers `.js`, `.css` ou `.html` rechargent la page automatiquement.
+Le navigateur s'ouvre sur **[http://localhost:8000](http://localhost:8000)**. Les modifications dans les fichiers `.js`, `.css` ou `.html` rechargent la page automatiquement.
 
 **Autre port :**
 
@@ -74,7 +74,7 @@ python start-server.py -p 3000
 
 **Version anglaise :** même procédure dans le dossier `en/`.
 
-### 3. Alternative sans Python
+### 3. Alternative sans Python  (recommandé)
 
 Si Python n'est pas disponible :
 
@@ -84,7 +84,7 @@ cd fr
 npx --yes serve -p 8000
 ```
 
-Puis ouvrir **http://localhost:8000**.
+Puis ouvrir **[http://localhost:8000](http://localhost:8000)**.
 
 ```bash
 # Serveur Python minimal (sans rechargement auto)
@@ -96,14 +96,16 @@ python -m http.server 8000
 
 ## Navigation pendant la présentation
 
-| Touche | Action |
-|--------|--------|
-| `→` `↓` `Espace` | Slide suivante |
-| `←` `↑` | Slide précédente |
-| `S` | Mode présentateur (notes + aperçu) |
-| `F` | Plein écran |
-| `Esc` | Vue d'ensemble de toutes les slides |
-| `B` | Écran noir (pause) |
+
+| Touche           | Action                              |
+| ---------------- | ----------------------------------- |
+| `→` `↓` `Espace` | Slide suivante                      |
+| `←` `↑`          | Slide précédente                    |
+| `S`              | Mode présentateur (notes + aperçu)  |
+| `F`              | Plein écran                         |
+| `Esc`            | Vue d'ensemble de toutes les slides |
+| `B`              | Écran noir (pause)                  |
+
 
 Les **fragments** (éléments avec la classe `fragment`) s'affichent un par un à chaque pression sur la touche suivante.
 
@@ -137,12 +139,14 @@ export function cleanup() {
 
 ### Éléments utiles
 
-| Élément | Usage |
-|---------|--------|
+
+| Élément                                  | Usage                              |
+| ---------------------------------------- | ---------------------------------- |
 | `<span class="speaker-badge">Nom</span>` | Badge intervenant en haut de slide |
-| `class="fragment"` | Révélation progressive au clic |
-| `<aside class="notes">…</aside>` | Notes présentateur (touche **S**) |
-| `images/mon-fichier.png` | Images dans `fr/images/` |
+| `class="fragment"`                       | Révélation progressive au clic     |
+| `<aside class="notes">…</aside>`         | Notes présentateur (touche **S**)  |
+| `images/mon-fichier.png`                 | Images dans `fr/images/`           |
+
 
 ### Slides avec graphiques
 
@@ -159,30 +163,23 @@ Voir `architecture.js`, `architectureSettlement.js` et `workflowHelper.js`. La c
 ### Ajouter
 
 1. **Créer** `fr/js/slides/maSlide.js` avec `html`, `initialize`, `cleanup`.
-
 2. **Déclarer** la section dans `fr/index.html` :
-
-   ```html
+  ```html
    <section id="maSlide"></section>
-   ```
-
+  ```
 3. **Ajouter l'ID** dans le tableau `slideIds` (même fichier, bloc `<script type="module">`) :
-
-   ```javascript
+  ```javascript
    const slideIds = [
      'title', 'probleme', /* … */ 'maSlide', 'conclusion', 'equipe'
    ];
-   ```
-
+  ```
 4. **Optionnel** — indiquer le prochain intervenant dans `fr/js/speakers.js` :
-
-   ```javascript
+  ```javascript
    export const nextSpeaker = {
      // …
      maSlide: 'Prénom NOM',
    };
-   ```
-
+  ```
    Mettre `null` pour masquer l'indicateur sur cette slide.
 
 ### Supprimer
@@ -209,14 +206,16 @@ Modifier les noms ou mettre `null` pour ne pas afficher l'indicateur (ex. slides
 
 Fichier : `fr/css/custom.css`
 
-| Classe | Rôle |
-|--------|------|
-| `.speaker-badge` | Badge intervenant |
-| `.compact-table` | Tableaux compacts |
-| `.slide-image` | Images pleine largeur |
-| `.visa-workflow-*` | Workflows Visa |
-| `.arch-suite-*` | Diagramme architecture (slide Middleware) |
-| `#next-speaker-hint` | Indicateur prochain intervenant |
+
+| Classe               | Rôle                                      |
+| -------------------- | ----------------------------------------- |
+| `.speaker-badge`     | Badge intervenant                         |
+| `.compact-table`     | Tableaux compacts                         |
+| `.slide-image`       | Images pleine largeur                     |
+| `.visa-workflow-*`   | Workflows Visa                            |
+| `.arch-suite-*`      | Diagramme architecture (slide Middleware) |
+| `#next-speaker-hint` | Indicateur prochain intervenant           |
+
 
 Les tailles de police dans Reveal sont relatives : `font-size: 0.5em` dans une slide ≈ moitié de la taille de base.
 
@@ -236,24 +235,26 @@ Après une modification en français :
 
 ## Liste des slides (19)
 
-| # | ID | Intervenant principal |
-|---|-----|----------------------|
-| 1 | `title` | — |
-| 2 | `probleme` | Dandara |
-| 3 | `historique` | Sabine |
-| 4 | `ecosysteme` | Ivan |
-| 5 | `dependance` | Loïc |
-| 6 | `risques` | Charbel |
-| 7–9 | `architecture`, `architectureSettlement`, `architectureSuite` | Charbel |
-| 10 | `contraintes` | Loïc |
-| 11 | `dora` | Ivan |
-| 12 | `alternatives` | Dandara |
-| 13 | `emergentes` | Sabine |
-| 14 | `comparatif` | Loïc |
-| 15–16 | `paymentHub`, `paymentHubSuite` | Ivan |
-| 17 | `perspectives` | Dandara |
-| 18 | `conclusion` | Sabine |
-| 19 | `equipe` | — |
+
+| #     | ID                                                            | Intervenant principal |
+| ----- | ------------------------------------------------------------- | --------------------- |
+| 1     | `title`                                                       | —                     |
+| 2     | `probleme`                                                    | Dandara               |
+| 3     | `historique`                                                  | Sabine                |
+| 4     | `ecosysteme`                                                  | Ivan                  |
+| 5     | `dependance`                                                  | Loïc                  |
+| 6     | `risques`                                                     | Charbel               |
+| 7–9   | `architecture`, `architectureSettlement`, `architectureSuite` | Charbel               |
+| 10    | `contraintes`                                                 | Loïc                  |
+| 11    | `dora`                                                        | Ivan                  |
+| 12    | `alternatives`                                                | Dandara               |
+| 13    | `emergentes`                                                  | Sabine                |
+| 14    | `comparatif`                                                  | Loïc                  |
+| 15–16 | `paymentHub`, `paymentHubSuite`                               | Ivan                  |
+| 17    | `perspectives`                                                | Dandara               |
+| 18    | `conclusion`                                                  | Sabine                |
+| 19    | `equipe`                                                      | —                     |
+
 
 ---
 
@@ -269,20 +270,22 @@ La page d'accueil racine (`index.html`) pointe vers `/fr/` et `/en/`.
 
 ## Dépannage
 
-| Problème | Solution |
-|----------|----------|
-| Page blanche / erreurs `import` dans la console | Lancer un serveur HTTP (voir ci-dessus), ne pas ouvrir en `file://` |
-| Slide vide | Vérifier que l'ID dans `index.html` correspond au nom du fichier `.js` |
-| Graphique qui ne s'affiche pas | Vérifier que `initialize()` est bien défini et que le `canvas` a un `id` unique |
-| Workflow Visa cassé après modification | Vérifier la config `nodes`, `connections` et `steps` dans le fichier slide |
-| Modifs non visibles | Ctrl+F5 (vidage cache) ou vérifier que le serveur tourne dans le bon dossier (`fr/`) |
+
+| Problème                                        | Solution                                                                             |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Page blanche / erreurs `import` dans la console | Lancer un serveur HTTP (voir ci-dessus), ne pas ouvrir en `file://`                  |
+| Slide vide                                      | Vérifier que l'ID dans `index.html` correspond au nom du fichier `.js`               |
+| Graphique qui ne s'affiche pas                  | Vérifier que `initialize()` est bien défini et que le `canvas` a un `id` unique      |
+| Workflow Visa cassé après modification          | Vérifier la config `nodes`, `connections` et `steps` dans le fichier slide           |
+| Modifs non visibles                             | Ctrl+F5 (vidage cache) ou vérifier que le serveur tourne dans le bon dossier (`fr/`) |
+
 
 ---
 
 ## Contacts & ressources
 
-- **Reveal.js** : https://revealjs.com/config/
-- **Chart.js** : https://www.chartjs.org/docs/
+- **Reveal.js** : [https://revealjs.com/config/](https://revealjs.com/config/)
+- **Chart.js** : [https://www.chartjs.org/docs/](https://www.chartjs.org/docs/)
 - Mémoire source : document MVT Archi paiement Visa/Mastercard
 
 ---
