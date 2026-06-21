@@ -114,7 +114,13 @@
       minScale: 0.2,
       maxScale: 2.0,
       transition: 'slide',
-      plugins: [ RevealNotes ]
+      plugins: [ RevealNotes ],
+      slideNumber: (slide) => {
+        const h = Reveal.getIndices(slide).h;
+        if (h === 0) return '';
+        const total = slideIds.length - 1;
+        return [String(h), '/', String(total)];
+      }
     });
     
     preloadAllSlides(slideIds).then(() => {

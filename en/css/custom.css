@@ -315,6 +315,17 @@ body {
   display: none !important;
 }
 
+/* Slide numbering (bottom-left; next-speaker stays bottom-right) */
+.reveal .slide-number {
+  left: 20px;
+  right: auto;
+  bottom: 14px;
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  font-size: 11px;
+  color: #b5b5b5;
+  background: transparent;
+}
+
 /* Interactive Visa workflow */
 .visa-workflow-wrap {
   width: 96%;
