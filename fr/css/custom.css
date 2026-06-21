@@ -326,6 +326,10 @@ body {
   background: transparent;
 }
 
+.reveal .slide-number[hidden] {
+  display: none !important;
+}
+
 /* Interactive Visa workflow */
 .visa-workflow-wrap {
   width: 96%;

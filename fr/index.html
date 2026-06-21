@@ -106,6 +106,18 @@
     ];
     
     let currentSlideId = null;
+
+    function syncSlideNumber() {
+      const el = document.querySelector('.reveal .slide-number');
+      if (!el) return;
+      const h = Reveal.getIndices().h;
+      if (h === 0) {
+        el.hidden = true;
+        return;
+      }
+      el.hidden = false;
+      el.textContent = `${h} / ${slideIds.length - 1}`;
+    }
     
     Reveal.initialize({
       hash: true,
@@ -115,13 +127,11 @@
       maxScale: 2.0,
       transition: 'slide',
       plugins: [ RevealNotes ],
-      slideNumber: (slide) => {
-        const h = Reveal.getIndices(slide).h;
-        if (h === 0) return '';
-        const total = slideIds.length - 1;
-        return [String(h), '/', String(total)];
-      }
+      slideNumber: true
     });
+
+    Reveal.on('ready', syncSlideNumber);
+    Reveal.on('slidechanged', syncSlideNumber);
     
     preloadAllSlides(slideIds).then(() => {
       slideIds.forEach(id => {
